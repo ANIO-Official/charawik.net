@@ -1,4 +1,16 @@
+nav{
+    width: 1440px;
+    height: 92px;
+    border-radius: 0 0 20px 20px;
+}
+#title{
+    font-weight:normal;
+}
+#title:hover{
+    color: #58a9cf;
+}
 #subtitle{
     font-size: 24px;
+    font-weight:400;
     color: #3C528B;
 }

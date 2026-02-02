@@ -7,13 +7,11 @@ import CharacterPage from './pages/CharacterPage/CharacterPage';
 import CharacterCreationPage from './pages/CharacterCreationPage/CharacterCreationPage';
 import ProfilePage from './pages/ProfilePage/ProfilePage'
 import ActivityModal from './components/Character/ActivityModal/ActivityModal';
-import Navbar from './components/Landing/Navbar/Navbar';
 
 function App() {
 
   return (
     <div id='application'>
-      <Navbar />
       <Routes>
         <Route path='/' element={<LandingPage />} />
         <Route path='/:username' element={<ProfilePage />} />
