@@ -1,0 +1,28 @@
+#notfound-error-page{
+    background: linear-gradient(rgb(12, 84, 167), rgb(34, 91, 165));
+    color: white;
+    font-size: 2rem;
+    padding-top: 12rem;
+}
+#notfound-error-title{
+    font-size: 5rem;
+}
+#notfound-error-subtitle{
+    font-size: 3rem;
+    color: rgb(155, 173, 253);
+}
+
+#notfound-error-subtext{
+    font-size: 1.25rem;
+}
+
+#notfound-error-button{
+    border-radius: 0.5rem;
+    background-color: rgb(163, 0, 0);
+    padding: 0.5rem 1rem;
+    color: white;
+}
+
+#notfound-error-button:hover{
+    transform: scale(1.1);
+}
