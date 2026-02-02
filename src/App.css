@@ -1,3 +1,4 @@
+/* Font */
 html{
     background-color: #8FC9E9;
 }
@@ -28,3 +29,29 @@ h3, p{
     color: #575757;
 }
 
+.active{
+    color: #FFDE70;
+}
+.inactive, .empty{
+    color: #C8C8C8;
+}
+
+/* Buttons */
+
+button{
+    width: 160px;
+    height: 55px;
+    border-radius: 80px;
+    filter: drop-shadow(0 8px 6px rgba(0, 0, 0, 0.25));
+    color: black;
+}
+
+.basic{
+    background: linear-gradient(#8FC9E9, #5D80D8);
+}
+.warning{
+    background: linear-gradient(#FD8D8D,#D63B3B);
+}
+.confirm{
+    background: linear-gradient(#7CFD87,#22662A);
+}
