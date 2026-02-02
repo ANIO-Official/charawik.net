@@ -1,0 +1,30 @@
+html{
+    background-color: #8FC9E9;
+}
+body {
+    font-family: "Inter";
+}
+
+h1 {
+    font-size: 48px;
+    color: #3C528B;
+}
+
+h2 {
+    font-size: 32px;
+    color: white;
+}
+#username,#stat #character-name{
+ color: #575757;
+}
+
+label{
+    font-size: 32px;
+    color: #575757;
+}
+
+h3, p{
+    font-size: 24px;
+    color: #575757;
+}
+
