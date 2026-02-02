@@ -14,3 +14,9 @@
 #charawik-mascot{
     height: 40rem;
 }
+#credits{
+    padding: 0 5rem;
+}
+#credits p{
+    color: rgb(35, 35, 35);
+}
