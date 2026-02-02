@@ -1,8 +1,6 @@
 /* Font */
-html{
+html body{
     background-color: #8FC9E9;
-}
-body {
     font-family: "Inter";
 }
 
