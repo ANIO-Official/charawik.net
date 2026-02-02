@@ -1,5 +1,16 @@
-
+#landing-split-container{
+    padding: 2rem 4rem;
+}
 #welcome-message{
-    font-size: 60px;
+    font-size: 50px;
     color: white;
+    font-weight: bold;
+}
+#website-description{
+    font-size: 24px;
+    color: white;
+    font-weight: bold;
+}
+#charawik-mascot{
+    height: 40rem;
 }

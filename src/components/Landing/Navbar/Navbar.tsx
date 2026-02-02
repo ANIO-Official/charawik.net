@@ -8,7 +8,6 @@ export default function Navbar(){
                 <NavLink to="/" style={{textDecoration: 'none'}}>
                     <h1 id="title">🌐 CharaWik.net <i id="subtitle">The character creation network!( •̀ ω •́ )y</i></h1>
                 </NavLink>
-                
             </nav>
         </header>
     )

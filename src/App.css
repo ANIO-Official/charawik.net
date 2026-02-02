@@ -40,8 +40,11 @@ button{
     width: 160px;
     height: 55px;
     border-radius: 80px;
+    border: none;
     filter: drop-shadow(0 8px 6px rgba(0, 0, 0, 0.25));
-    color: black;
+    color: white;
+    font-weight: bold;
+    font-size: 1.3rem;
 }
 
 .basic{
@@ -52,4 +55,18 @@ button{
 }
 .confirm{
     background: linear-gradient(#7CFD87,#22662A);
+}
+.toggler{
+    background-color: transparent;
+    filter: none;
+}
+
+/* Input Fields */
+
+input{
+    border-radius: 30px;
+    width: 26rem;
+    height: 3rem;
+    margin-bottom: 1rem;
+    padding: 1rem;
 }

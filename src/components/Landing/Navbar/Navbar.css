@@ -1,7 +1,8 @@
 nav{
-    width: 1440px;
+    width: 90%;
     height: 92px;
     border-radius: 0 0 20px 20px;
+    filter: drop-shadow(-4px 10px 7.5px rgba(0, 0, 0, 0.25));
 }
 #title{
     font-weight:normal;
@@ -12,5 +13,5 @@ nav{
 #subtitle{
     font-size: 24px;
     font-weight:400;
-    color: #3C528B;
+    color: #c5cde1;
 }
