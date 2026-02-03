@@ -5,8 +5,6 @@ export function checkValidationFields(form: HTMLFormElement, setErrors: Function
     const email: HTMLInputElement | null = form.querySelector('#email')
     const password: HTMLInputElement | null = form.querySelector('#password')
     const confirmpasword: HTMLInputElement | null = form.querySelector('#confirmPassword')
-    console.log(confirmpasword && confirmpasword.validationMessage)
-
     /*FORM VALIDITY ON SUBMIT=========================== */
     //check for invalid areas
     switch (true) {
@@ -53,18 +51,18 @@ export function checkValidationFields(form: HTMLFormElement, setErrors: Function
     }
 }
 
-export function valueMissing(form: HTMLFormElement){
+export function valueMissing(form: HTMLFormElement) {
     const username: HTMLInputElement | null = form.querySelector('#username')
     const email: HTMLInputElement | null = form.querySelector('#email')
     const password: HTMLInputElement | null = form.querySelector('#password')
     const confirmpasword: HTMLInputElement | null = form.querySelector('#confirmPassword')
 
-    if(
+    if (
         username && username.value === "" ||
         email && email.value === "" ||
         password && password.value === "" ||
         confirmpasword && confirmpasword.value === ""
-    ){
+    ) {
         return true //true a field is missing a value.
     }
     return false // false, everything is filled out

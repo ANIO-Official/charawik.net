@@ -2,9 +2,13 @@ import { useState } from "react";
 import "./LoginSignUpForm.css";
 import { checkValidationFields, valueMissing } from "../../../utilities/formValidation";
 import { useNavigate } from "react-router-dom";
+import { submitUser } from "../../../utilities/userSubmission";
+import type { userData } from "../../../types";
 
 export default function LoginSignUpForm() {
     const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(false)
+    const [fetchError, setFetchError] = useState(false)
     const [loggingIn, setLoggingIn] = useState<Boolean>(false); //default - Is the user logging in?
     const [errorField, setErrorField] = useState({
         username: "", //default
@@ -12,8 +16,7 @@ export default function LoginSignUpForm() {
         password: "", //default
         confirmPassword: "" //default
     })
-    console.log(errorField)
-    const [field, setField] = useState({
+    const [formData, setFormData] = useState({
         username: "", //default
         email: "", //default
         password: "", //default
@@ -32,7 +35,7 @@ export default function LoginSignUpForm() {
     //Input Changes
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
-        setField((prevData) => ({
+        setFormData((prevData) => ({
             ...prevData, //get the previous version of the state variable keyvalue pairs.
             [name]: value, //set it to the new value from the event target.
         }));
@@ -45,10 +48,10 @@ export default function LoginSignUpForm() {
     };
 
     //Form Submission : Final Validity Check, Check if Logging in or Signing Up, Send Appropriate Message, Send FormData
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event?.preventDefault();
         //CheckValidity================
-        if(valueMissing(event.currentTarget)){
+        if (valueMissing(event.currentTarget)) {
             return alert(
                 "You missed a field. Please check again! ( ﾉ ﾟｰﾟ)ﾉ",
             );
@@ -59,18 +62,18 @@ export default function LoginSignUpForm() {
             );
         }
         //=============================
-        loggingIn
-            ? alert("Welcome back!")
-            : alert("Welcome to CharaWik! Let's get you to your profile.ヾ(⌐■_■)ノ♪");
-        //Send New User Data to Database============
-        const form = event.currentTarget; //cache the form to a variable
-        const formData = new FormData(form); //create new form data
-        //===========================================
-        //Clear Form, Set to Login, Send to Profile
-        form.reset(); //reset form
-        setLoggingIn(true); //toggle to Login Screen as new default due to registering a new account.
-        loggingIn ? navigate(`/exampleToReplace`) : navigate(`/${field.username}`);
-    };
+        //Welcome Alert, Send New User Data to Database============
+        const data: userData[] = await submitUser(
+            event.currentTarget, //form
+            formData, //formData
+            setIsLoading, //Function for loading state variable
+            setLoggingIn, //Function for logging state variable
+            loggingIn, //State variable for Logging in
+            setFetchError //Function for a fetch error state variable.
+        )
+        data && alert("Let's get you to your profile.ヾ(⌐■_■)ノ♪");
+        data && navigate(`/${data[0].user.username}`); //Send to Profile with Data obtained
+    }
 
     return (
         <>
@@ -209,6 +212,11 @@ export default function LoginSignUpForm() {
                         className="basic"
                     >{` ${loggingIn ? "Login" : "Sign Up"}`}</button>
                 </div>
+                {
+                    isLoading ? <p id="submit-message">Logging you in...(∪.∪ )...zzz</p> :
+                        fetchError && !loggingIn ? <p id="submit-error">A server error occured while registering user. Please try again later.</p> :
+                            fetchError && loggingIn ? <p id="submit-error">Incorrect Username or Password!</p> :
+                                <p></p>}
             </form>
         </>
     );

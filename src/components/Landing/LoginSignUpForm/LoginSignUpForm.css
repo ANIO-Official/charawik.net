@@ -27,3 +27,21 @@ form{
     min-height: fit-content;
     font-style: italic;
 }
+
+#submit-error{
+    font-size: 1rem;
+    font-weight: bold;
+    color: red;
+    background-color: rgba(255, 220, 24, 0.789);
+    text-align: center;
+    padding: 0.5rem;
+}
+
+#submit-message{
+    font-size: 1rem;
+    font-weight: bold;
+    color: green;
+    background-color: rgba(205, 255, 178, 0.789);
+    text-align: center;
+    padding: 0.5rem;
+}
