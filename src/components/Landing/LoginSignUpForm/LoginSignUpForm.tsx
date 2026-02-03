@@ -1,19 +1,27 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./LoginSignUpForm.css";
-import { checkValidationFields } from "../../../utilities/formValidation";
+import { checkValidationFields, valueMissing } from "../../../utilities/formValidation";
 import { useNavigate } from "react-router-dom";
 
 export default function LoginSignUpForm() {
     const navigate = useNavigate();
     const [loggingIn, setLoggingIn] = useState<Boolean>(false); //default - Is the user logging in?
+    const [errorField, setErrorField] = useState({
+        username: "", //default
+        email: "", //default
+        password: "", //default
+        confirmPassword: "" //default
+    })
+    console.log(errorField)
     const [field, setField] = useState({
         username: "", //default
         email: "", //default
         password: "", //default
-        confirmPassword: "", //default
+        confirmPassword: "" //default
     });
     const [formIsValid, setFormIsValid] = useState<Boolean>(false); //default - Are all fields valid?
 
+    //Form Toggling Buttons
     const handleToggle = (event: React.MouseEvent<HTMLButtonElement>) => {
         const button = event.currentTarget;
         return button.classList.contains("login")
@@ -21,30 +29,39 @@ export default function LoginSignUpForm() {
             : setLoggingIn(false);
     };
 
+    //Input Changes
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
-
         setField((prevData) => ({
             ...prevData, //get the previous version of the state variable keyvalue pairs.
             [name]: value, //set it to the new value from the event target.
         }));
-    };
+    }
 
+    //Form Validation Checks
     const handleFormChange = (event: React.ChangeEvent<HTMLFormElement>) => {
-        const validityBool = checkValidationFields(event.currentTarget);
+        const validityBool = checkValidationFields(event.currentTarget, setErrorField);
         setFormIsValid(validityBool); //final-check the fields to be sure they are valid.
     };
+
+    //Form Submission : Final Validity Check, Check if Logging in or Signing Up, Send Appropriate Message, Send FormData
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event?.preventDefault();
         //CheckValidity================
-        if (!formIsValid) {
-            console.log(field, formIsValid);
+        if(valueMissing(event.currentTarget)){
             return alert(
-                "There are incorrect or missing field(s). Please check the highlighted field(s)! 🔔",
+                "You missed a field. Please check again! ( ﾉ ﾟｰﾟ)ﾉ",
+            );
+        }
+        if (!formIsValid) {
+            return alert(
+                "Please check the highlighted field(s)! 🔔",
             );
         }
         //=============================
-        loggingIn ? alert("Welcome back!") : alert("Welcome to CharaWik! Let's get you to your profile.ヾ(⌐■_■)ノ♪")
+        loggingIn
+            ? alert("Welcome back!")
+            : alert("Welcome to CharaWik! Let's get you to your profile.ヾ(⌐■_■)ノ♪");
         //Send New User Data to Database============
         const form = event.currentTarget; //cache the form to a variable
         const formData = new FormData(form); //create new form data
@@ -52,7 +69,7 @@ export default function LoginSignUpForm() {
         //Clear Form, Set to Login, Send to Profile
         form.reset(); //reset form
         setLoggingIn(true); //toggle to Login Screen as new default due to registering a new account.
-        loggingIn? navigate(`/exampleToReplace`) : navigate(`/${field.username}`)
+        loggingIn ? navigate(`/exampleToReplace`) : navigate(`/${field.username}`);
     };
 
     return (
@@ -100,9 +117,9 @@ export default function LoginSignUpForm() {
                             id="form-inputs"
                             className="d-flex flex-column align-items-center pt-4"
                         >
-                            <div id="email-input-container">
-                                <label>Email Address</label>
-                                <br />
+                            <div id="email-input-container" className="d-flex flex-column">
+                                <label htmlFor="email">Email Address</label>
+                                <span id="email-error" className="error-message">{errorField.email}</span>
                                 <input
                                     onChange={handleChange}
                                     id="email"
@@ -111,15 +128,18 @@ export default function LoginSignUpForm() {
                                     placeholder="janedoesnot404@gmail.com"
                                 />
                             </div>
-                            <div id="password-input-container">
-                                <label>Password</label>
-                                <br />
+                            <div id="password-input-container" className="d-flex flex-column">
+                                <label htmlFor="password">Password</label>
+                                <span id="password-error" className="error-message">{errorField.password}</span>
                                 <input
                                     onChange={handleChange}
                                     id="password"
                                     type="password"
                                     name="password"
-                                    placeholder="Atleast 8 characters, including 1 number and 1 symbol."
+                                    placeholder="Atleast 8 characters, 1 number, 1 symbol, & 1 uppercase."
+                                    minLength={8}
+                                    maxLength={16}
+                                    pattern="^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){8,16}$"
                                 />
                             </div>
                         </div>
@@ -130,20 +150,23 @@ export default function LoginSignUpForm() {
                             id="form-inputs"
                             className="d-flex flex-column align-items-center pt-4"
                         >
-                            <div id="username-input-container">
-                                <label>Username</label>
-                                <br />
+                            <div id="username-input-container" className="d-flex flex-column">
+                                <label htmlFor="username">Username</label>
+                                <span id="username-error" className="error-message">{errorField.username}</span>
                                 <input
                                     onChange={handleChange}
                                     id="username"
                                     type="text"
                                     name="username"
                                     placeholder="judyJuggerna4ut"
+                                    minLength={4}
+                                    maxLength={20}
+                                    pattern="^[a-z0-9\d](?:[a-z0-9\d]|_(?=[a-z0-9\d])){0,38}"
                                 />
                             </div>
-                            <div id="email-input-container">
-                                <label>Email Address</label>
-                                <br />
+                            <div id="email-input-container" className="d-flex flex-column">
+                                <label htmlFor="email">Email Address</label>
+                                <span id="email-error" className="error-message">{errorField.email}</span>
                                 <input
                                     onChange={handleChange}
                                     id="email"
@@ -152,20 +175,23 @@ export default function LoginSignUpForm() {
                                     placeholder="janedoesnot404@gmail.com"
                                 />
                             </div>
-                            <div id="password-input-container">
-                                <label>Password</label>
-                                <br />
+                            <div id="password-input-container" className="d-flex flex-column">
+                                <label htmlFor="password">Password</label>
+                                <span id="password-error" className="error-message">{errorField.password}</span>
                                 <input
                                     onChange={handleChange}
                                     id="password"
                                     type="password"
                                     name="password"
-                                    placeholder="Atleast 8 characters, including 1 number and 1 symbol."
+                                    placeholder="Atleast 8 characters, 1 number, 1 symbol, & 1 uppercase."
+                                    minLength={8}
+                                    maxLength={16}
+                                    pattern="^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){8,16}$"
                                 />
                             </div>
-                            <div id="password-confirm-container">
-                                <label>Confirm Password</label>
-                                <br />
+                            <div id="confirm-password-container" className="d-flex flex-column">
+                                <label htmlFor="confirmPassword">Confirm Password</label>
+                                <span id="confirmPassword-error" className="error-message">{errorField.confirmPassword}</span>
                                 <input
                                     onChange={handleChange}
                                     id="confirmPassword"

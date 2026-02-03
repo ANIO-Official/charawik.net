@@ -22,3 +22,8 @@ form{
     padding: 1rem 2rem;
     padding-left: 5rem;
 }
+
+.error-message{
+    min-height: fit-content;
+    font-style: italic;
+}
