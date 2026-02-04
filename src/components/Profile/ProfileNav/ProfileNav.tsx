@@ -1,5 +1,5 @@
 import Mascot from "../../../assets/charawik-mascot-anio.png";
-import { NavLink, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import "./ProfileNav.css";
 import { useAuthContext } from "../../../context/AuthContext/AuthContext";
 import useFetch from "../../../custom-hooks/useFetch";
@@ -21,7 +21,6 @@ export default function ProfileNav() {
     const [uploading, setUploading] = useState<Boolean>(false);
     const [profileImage, setProfileImage] = useState<ProfileImage>({ profilePicture: "" });
 
-    console.log(mongoProfilePicture)
     useEffect(() => {
         if (
             Object.keys(mongoProfilePicture.data[0] > 0) && //data returns

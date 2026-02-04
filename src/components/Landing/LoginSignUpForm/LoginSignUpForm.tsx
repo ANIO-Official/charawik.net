@@ -61,7 +61,7 @@ export default function LoginSignUpForm() {
             );
         }
         if (!formIsValid) {
-            return alert(
+            return loggingIn? alert("Incorrect Username or Password. 🔔") : alert(
                 "Please check the highlighted field(s)! 🔔",
             );
         }
