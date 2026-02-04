@@ -4,11 +4,13 @@ import { checkValidationFields, valueMissing } from "../../../utilities/formVali
 import { useNavigate } from "react-router-dom";
 import { submitUser } from "../../../utilities/userSubmission";
 import type { userData } from "../../../types";
+import { useAuthContext } from "../../../context/AuthContext/AuthContext";
 
 export default function LoginSignUpForm() {
     const navigate = useNavigate();
-    const [isLoading, setIsLoading] = useState(false)
-    const [fetchError, setFetchError] = useState(false)
+    const [formIsValid, setFormIsValid] = useState<Boolean>(false); //default - Are all fields valid?
+    const [isLoading, setIsLoading] = useState<Boolean>(false)
+    const [fetchError, setFetchError] = useState<Boolean>(false)
     const [loggingIn, setLoggingIn] = useState<Boolean>(false); //default - Is the user logging in?
     const [errorField, setErrorField] = useState({
         username: "", //default
@@ -22,7 +24,9 @@ export default function LoginSignUpForm() {
         password: "", //default
         confirmPassword: "" //default
     });
-    const [formIsValid, setFormIsValid] = useState<Boolean>(false); //default - Are all fields valid?
+
+    //Context
+    const { setToken, setUsername } = useAuthContext()
 
     //Form Toggling Buttons
     const handleToggle = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -71,6 +75,8 @@ export default function LoginSignUpForm() {
             loggingIn, //State variable for Logging in
             setFetchError //Function for a fetch error state variable.
         )
+        setToken(data[0].token) //update state
+        setUsername(data[0].user.username) //update state
         data && alert("Let's get you to your profile.ヾ(⌐■_■)ノ♪");
         data && navigate(`/${data[0].user.username}`); //Send to Profile with Data obtained
     }
