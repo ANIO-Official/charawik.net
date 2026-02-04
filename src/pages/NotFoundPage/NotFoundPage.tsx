@@ -11,7 +11,7 @@ export default function NotFoundPage(){
             <p id="notfound-error-subtext" className="py-5 text-center">
                 The page you were looking for doesn't exist!
                 <br/>
-                <i>The url may be mistyped in the address bar or the page was moved.</i>
+                <i>Make sure you're logged in or that the url is typed correctly.</i>
                 <br/>
                 <b>Here's a way back home. o(*￣▽￣*)ブ See ya, cowboy!</b>
             </p>

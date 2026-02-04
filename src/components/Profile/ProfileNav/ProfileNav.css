@@ -1,13 +1,13 @@
 #profile-nav{
-    width: 85%;
+    width: 70%;
     height: 90vh;
+    border-radius: 0 5rem 5rem 0;
 }
 /*Profile Image Styling*/
 #profile-image-upload{ 
     width: 20rem;
     height: 20rem;
     border-radius: 100%;
-    margin: 2rem 0;
     background-color: #8FC9E9;
     object-position: center;
     object-fit:cover;
@@ -19,4 +19,18 @@
 /*Character Stats Styling*/
 #stats{
     color: #737373;
+}
+#stats-loading, #stats-error{
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    padding: 0.5rem;
+}
+#stats-loading{
+    color: rgb(8, 29, 51);
+    background-color: rgba(136, 247, 255, 0.789);
+}
+#stats-error{
+    color: red;
+    background-color: rgba(255, 220, 24, 0.789);
 }

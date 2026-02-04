@@ -1,5 +1,6 @@
 import type { ReactNode } from "react"
 
+//====Fetch Data Types
 export interface userData {
   token: string,
   user: {
@@ -11,17 +12,50 @@ export interface userData {
   }
 }
 
+export interface Character {
+  _id: string,
+  profileImage: string,
+  name: string,
+  age: Number,
+  biography: string,
+  likes: string[],
+  dislikes: string[],
+  owner: string,
+  __v: Number
+
+}
+
+export interface CharacterData {
+  characters: Character[],
+  count: Number
+}
+
+export interface ActivityData {
+
+}
+
+//======== Context Types
+
 export interface AuthContextType {
   setToken: (value: string) => void, //call to set the theme
   token: string,
-  setUsername: (value: string)=> void, //call to set the username
+  setUsername: (value: string) => void, //call to set the username
   username: string
 }
+
+//======== Prop Types
 
 export interface ContextProviderProps {
   children: ReactNode
 }
 
-export interface ProfileImage{
+export interface CharacterPreviewProps{
+  characterName: string,
+  characterPicture: string,
+  characterID: string
+}
+
+//======== Other Types
+export interface ProfileImage {
   profilePicture: string
 }

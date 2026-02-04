@@ -1,0 +1,7 @@
+#character-list-container{
+    background-color: rgba(60, 82, 139, 0.22);
+    width: 70%;
+    min-height: 90vh;
+    border-radius: 3rem;
+    padding: 3rem;
+}

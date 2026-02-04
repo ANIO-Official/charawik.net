@@ -1,5 +1,5 @@
 import Mascot from "../../../assets/charawik-mascot-anio.png";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./ProfileNav.css";
 import { useAuthContext } from "../../../context/AuthContext/AuthContext";
 import useFetch from "../../../custom-hooks/useFetch";
@@ -9,7 +9,8 @@ import type { ProfileImage } from "../../../types";
 
 export default function ProfileNav() {
     const params = useParams();
-    const { token } = useAuthContext();
+    const { token, setToken } = useAuthContext();
+    const navigate = useNavigate();
 
     //Fetch Characters - GET REQUEST (Default Request of useFetch)
     const { data, loading, error } = useFetch(
@@ -19,18 +20,20 @@ export default function ProfileNav() {
         `${import.meta.env.VITE_API_URL}/api/users/profilepicture?token=${token}`,
     );
     const [uploading, setUploading] = useState<Boolean>(false);
-    const [profileImage, setProfileImage] = useState<ProfileImage>({ profilePicture: "" });
+    const [profileImage, setProfileImage] = useState<ProfileImage>({
+        profilePicture: "",
+    });
 
     useEffect(() => {
         if (
             Object.keys(mongoProfilePicture.data[0] > 0) && //data returns
             !mongoProfilePicture.loading && //not loading more data
-            !mongoProfilePicture.error) { // no error occured
-            setProfileImage(mongoProfilePicture.data[0]) //set the data to the profile picture state variable.
+            !mongoProfilePicture.error
+        ) {
+            // no error occured
+            setProfileImage(mongoProfilePicture.data[0]); //set the data to the profile picture state variable.
         }
-    }, [mongoProfilePicture])
-
-
+    }, [mongoProfilePicture]);
 
     const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -50,18 +53,24 @@ export default function ProfileNav() {
         setUploading(false);
     };
 
+    const handleLogout = (event: React.MouseEvent<HTMLButtonElement>) => {
+        setToken("");
+        navigate("/");
+        console.log("logged out.");
+    };
+
     return (
-        <header className="d-flex flex-row justify-content-start mt-5 col-md">
+        <header className="d-flex flex-row justify-content-start col-md">
             <nav
                 id="profile-nav"
-                className="bg-white d-flex flex-column align-items-center"
+                className="bg-white d-flex flex-column align-items-center justify-content-between p-5"
             >
-                <h2 id="username">{params.username}</h2>
                 <form
                     className="d-flex flex-column justify-content-center"
                     onSubmit={handleSubmit}
                 >
-                    <label htmlFor="profile-image-input">
+                    <label htmlFor="profile-image-input" className="text-center">
+                         <h2 id="username" className="pt-4 pb-5">@{params.username}</h2>
                         <img
                             onClick={() => setUploading(true)}
                             id="profile-image-upload"
@@ -95,9 +104,9 @@ export default function ProfileNav() {
                     )}
                 </form>
                 {loading ? (
-                    <h2>Loading Character Stats...</h2>
+                    <h2 id="stats-loading">Loading Character Stats...</h2>
                 ) : error ? (
-                    <h2>Error Obtaining Character Stats!Sorry :(</h2>
+                    <h2 id="stats-error">Error Obtaining Character Stats! Sorry :(</h2>
                 ) : (
                     <h2 id="stats">
                         {" "}
@@ -105,6 +114,9 @@ export default function ProfileNav() {
                         made
                     </h2>
                 )}
+                <button onClick={handleLogout} className="warning">
+                    Logout
+                </button>
             </nav>
         </header>
     );

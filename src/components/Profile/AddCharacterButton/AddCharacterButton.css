@@ -1,0 +1,10 @@
+.add-character-button{
+    background-color: white;
+    color: #3C528B;
+    border-radius: 100%;
+    font-weight: bold;
+    font-size: 3rem;
+    height: 150px;
+    width:150px;
+    margin-bottom: 1rem;
+}
