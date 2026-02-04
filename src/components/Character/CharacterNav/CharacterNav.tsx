@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../../context/AuthContext/AuthContext";
 import useFetch from "../../../custom-hooks/useFetch";
 import type { ProfileImage } from "../../../types";
-import { submitProfilePicture } from "../../../utilities/userSubmission";
+import { submitProfilePicture } from "../../../utilities/userRequests";
 import Mascot from "../../../assets/charawik-mascot-anio.png";
 import "../../MainNav.css"
 

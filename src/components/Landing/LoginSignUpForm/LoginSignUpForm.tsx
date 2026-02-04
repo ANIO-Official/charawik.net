@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./LoginSignUpForm.css";
 import { checkValidationFields, valueMissing } from "../../../utilities/formValidation";
 import { useNavigate } from "react-router-dom";
-import { submitUser } from "../../../utilities/userSubmission";
+import { submitUser } from "../../../utilities/userRequests";
 import type { userData } from "../../../types";
 import { useAuthContext } from "../../../context/AuthContext/AuthContext";
 

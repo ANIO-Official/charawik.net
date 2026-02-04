@@ -1,3 +1,5 @@
+// For all PUT and POST REQUESTS 
+
 export const submitUser = async (
     form: HTMLFormElement,
     formData: Object,

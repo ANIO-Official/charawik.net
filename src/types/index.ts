@@ -55,6 +55,13 @@ export interface CharacterPreviewProps{
   characterID: string
 }
 
+export interface DeletionModalProps{
+  hidden: boolean,
+  setHidden: (newBool:boolean) => void,
+  documentType: string,
+  id: string
+}
+
 //======== Other Types
 export interface ProfileImage {
   profilePicture: string

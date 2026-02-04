@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import './App.css'
 import LandingPage from './pages/LandingPage/LandingPage';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
@@ -7,8 +7,12 @@ import CharacterPage from './pages/CharacterPage/CharacterPage';
 import CharacterCreationPage from './pages/CharacterCreationPage/CharacterCreationPage';
 import ProfilePage from './pages/ProfilePage/ProfilePage'
 import ActivityModal from './components/Character/ActivityModal/ActivityModal';
+import DeletionModal from './components/Character/DeletionModal/DeletionModal';
 
 function App() {
+
+  const location = useLocation()
+  const previousLocation = location.state?.previousLocation
 
   return (
     <div id='application'>
@@ -17,7 +21,6 @@ function App() {
         <Route path='/:username' element={<ProfilePage />} />
         <Route path='/characters/create' element={<CharacterCreationPage />} />
         <Route path='/characters/:characterId' element={<CharacterPage />} />
-        <Route path='/activities/create' Component={ActivityModal} />
         <Route path='/characters/:characterId/activities/:activityId' element={<ActivityPage />} />
         <Route path='*' element={<NotFoundPage />} />
       </Routes>

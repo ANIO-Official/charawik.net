@@ -4,7 +4,7 @@ import "../../MainNav.css";
 import { useAuthContext } from "../../../context/AuthContext/AuthContext";
 import useFetch from "../../../custom-hooks/useFetch";
 import { useEffect, useState } from "react";
-import { submitProfilePicture } from "../../../utilities/userSubmission";
+import { submitProfilePicture } from "../../../utilities/userRequests";
 import type { ProfileImage } from "../../../types";
 
 export default function ProfileNav() {
