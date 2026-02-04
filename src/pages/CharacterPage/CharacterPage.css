@@ -1,12 +1,34 @@
-#character-details-title{
-    color: #1E1E1E;
+#character-details-container{
+    background-color: rgba(60, 82, 139, 0.22);
+    width: 70%;
+    min-height: 90vh;
+    border-radius: 3rem;
+    padding: 3rem;
+}
+.button-container{
+    width: 100%;
 }
 #character-details{
+    width: 100%;
+}
+.character-details-title{
+    color: #1E1E1E;
+    margin: 0.5rem 0;
+}
+#character-details p{
     color: #000000;
+    font-size: 1.25rem;
 }
 #character-subname{
     color: rgba(30, 30, 30, 0.32);
+    font-style: italic;
 }
-#character-detail-bg{
-    background-color: rgba(60, 82, 139, 0.22);
+#create-activity-button{
+    background: none;
+    color: #1E1E1E;
+    font-size: 1.5rem;
+    filter: none;
+}
+#create-activity-button:hover{
+    color: #003eba;
 }
