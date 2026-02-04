@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 export default function useFetch(url: string, options?: RequestInit) {
   //use a generic array, as union types can cause errors here when accessing data
-  const [data, setData] = useState<any[]>([])
+  const [data, setData] = useState<any[]>([{}])
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error | null>(null);
 
@@ -10,7 +10,7 @@ export default function useFetch(url: string, options?: RequestInit) {
     if (!url) return;
 
     const controller = new AbortController();
-    setData([]);
+    setData([{}]);
     setError(null);
     setLoading(true);
 

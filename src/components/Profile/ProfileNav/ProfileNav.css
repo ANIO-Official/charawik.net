@@ -1,0 +1,22 @@
+#profile-nav{
+    width: 85%;
+    height: 90vh;
+}
+/*Profile Image Styling*/
+#profile-image-upload{ 
+    width: 20rem;
+    height: 20rem;
+    border-radius: 100%;
+    margin: 2rem 0;
+    background-color: #8FC9E9;
+    object-position: center;
+    object-fit:cover;
+}
+#profile-image-upload:hover{
+    cursor: pointer;
+    opacity: 80%;
+}
+/*Character Stats Styling*/
+#stats{
+    color: #737373;
+}

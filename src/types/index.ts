@@ -21,3 +21,7 @@ export interface AuthContextType {
 export interface ContextProviderProps {
   children: ReactNode
 }
+
+export interface ProfileImage{
+  profilePicture: string
+}

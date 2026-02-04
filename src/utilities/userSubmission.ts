@@ -29,3 +29,23 @@ export const submitUser = async (
         isLoading(false); //Set false, Loading has ended.
     }
 };
+export const submitProfilePicture = async (
+    newImageObj: Object,
+    token: string
+) => {
+    try {
+        const response = await fetch(
+            `${import.meta.env.VITE_API_URL}/api/users/profilepicture?token=${token}`,
+            {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(newImageObj),
+            },
+        );
+        if (!response.ok) throw new Error("API Error! Response was not ok.");
+        const data = await response.json();
+        return data
+    } catch (error) {
+        console.error(error);
+    }
+};
