@@ -1,40 +1,35 @@
-import Mascot from "../../../assets/charawik-mascot-anio.png";
-import { useNavigate, useParams } from "react-router-dom";
-import "../../MainNav.css";
+import { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../../context/AuthContext/AuthContext";
 import useFetch from "../../../custom-hooks/useFetch";
-import { useEffect, useState } from "react";
-import { submitProfilePicture } from "../../../utilities/userSubmission";
 import type { ProfileImage } from "../../../types";
+import { submitProfilePicture } from "../../../utilities/userSubmission";
+import Mascot from "../../../assets/charawik-mascot-anio.png";
+import "../../MainNav.css"
 
-export default function ProfileNav() {
+export default function CharacterNav() {
     const params = useParams();
-    const { token, setToken } = useAuthContext();
+    const { token, username } = useAuthContext();
     const navigate = useNavigate();
-
     //Fetch Characters - GET REQUEST (Default Request of useFetch)
-    const { data, loading, error } = useFetch(
-        `${import.meta.env.VITE_API_URL}/api/characters?token=${token}`,
-    );
-    const mongoProfilePicture = useFetch(
-        `${import.meta.env.VITE_API_URL}/api/users/profilepicture?token=${token}`,
+    const characterFetch = useFetch(
+        `${import.meta.env.VITE_API_URL}/api/characters/${params.characterId}?token=${token}`,
     );
     const [uploading, setUploading] = useState<Boolean>(false);
-    const [profileImage, setProfileImage] = useState<ProfileImage>({
-        profilePicture: "",
-    });
-
+    const [profileImage, setProfileImage] = useState<ProfileImage>({ profilePicture: "" });
     useEffect(() => {
         if (
-            Object.keys(mongoProfilePicture.data[0]).length > 0 && //data returns
-            !mongoProfilePicture.loading && //not loading more data
-            !mongoProfilePicture.error
+            Object.keys(characterFetch.data[0]).length > 0 && //data returns
+            !characterFetch.loading && //not loading more data
+            !characterFetch.error
         ) {
+            const imageURL: string = characterFetch.data[0].characters.profileImage
             // no error occured
-            setProfileImage(mongoProfilePicture.data[0]); //set the data to the profile picture state variable.
+            setProfileImage({ profilePicture: imageURL }); //set the data to the profile picture state variable.
         }
-    }, [mongoProfilePicture.data]);
+    }, [characterFetch.data]);
 
+    //PUT Request for Any changes submitted
     const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>) => {
         event.preventDefault();
         await submitProfilePicture(profileImage, token);
@@ -53,12 +48,6 @@ export default function ProfileNav() {
         setUploading(false);
     };
 
-    const handleLogout = (event: React.MouseEvent<HTMLButtonElement>) => {
-        setToken("");
-        navigate("/");
-        console.log("logged out.");
-    };
-
     return (
         <header className="d-flex flex-row justify-content-start col-md">
             <nav
@@ -70,12 +59,12 @@ export default function ProfileNav() {
                     onSubmit={handleSubmit}
                 >
                     <label htmlFor="profile-image-input" className="text-center">
-                         <h2 id="username" className="pt-4 pb-5">@{params.username}</h2>
+                        <h2 id="username" className="pt-4 pb-5">@{username}</h2>
                         <img
                             onClick={() => setUploading(true)}
                             id="profile-image-upload"
                             src={profileImage.profilePicture || Mascot}
-                            alt="Your profile picture."
+                            alt="Character profile picture."
                         />
                     </label>
                     <input
@@ -103,19 +92,25 @@ export default function ProfileNav() {
                         false
                     )}
                 </form>
-                {loading ? (
-                    <h2 id="stats-loading">Loading Character Stats...</h2>
-                ) : error ? (
-                    <h2 id="stats-error">Error Obtaining Character Stats! Sorry :(</h2>
+                <h2 style={{ color: "#575757" }}>
+                    {Object.keys(characterFetch.data[0]).length > 0 &&
+                        characterFetch.data[0].characters.name}
+                </h2>
+                {characterFetch.loading ? (
+                    <h2 id="stats-loading">Loading Character Age</h2>
+                ) : characterFetch.error ? (
+                    <h2 id="stats-error">Error Obtaining Character Age! Sorry :(</h2>
                 ) : (
-                    <h2 id="stats">
-                        {" "}
-                        {Object.keys(data[0]).length === 0 ? 0 : data[0].count} character(s)
-                        made
-                    </h2>
-                )}
-                <button onClick={handleLogout} className="warning">
-                    Logout
+                    Object.keys(characterFetch.data[0]).length > 0 &&
+                    (<h2 id="stats">
+                        {
+                            characterFetch.data[0].characters.age === "" ?
+                                <i>No Age Provided</i> :
+                                ` Age: ${characterFetch.data[0].characters.age}`}</h2>)
+                )
+                }
+                <button onClick={() => navigate(`/${username}`)} className="basic">
+                    My Profile
                 </button>
             </nav>
         </header>
