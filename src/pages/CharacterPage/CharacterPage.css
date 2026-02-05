@@ -49,10 +49,8 @@
 }
 
 .edit-character-input {
-    height: max-content;
     width: 100%;
     text-align: start;
-    text-overflow: ellipsis;
 }
 
 

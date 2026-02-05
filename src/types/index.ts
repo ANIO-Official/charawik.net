@@ -12,6 +12,11 @@ export interface userData {
   }
 }
 
+export interface characterResData{
+  message: string
+  characters: Character 
+}
+
 export interface Character {
   _id: string,
   profileImage: string,
@@ -49,15 +54,15 @@ export interface ContextProviderProps {
   children: ReactNode
 }
 
-export interface CharacterPreviewProps{
+export interface CharacterPreviewProps {
   characterName: string,
   characterPicture: string,
   characterID: string
 }
 
-export interface DeletionModalProps{
+export interface DeletionModalProps {
   hidden: boolean,
-  setHidden: (newBool:boolean) => void,
+  setHidden: (newBool: boolean) => void,
   documentType: string,
   id: string
 }

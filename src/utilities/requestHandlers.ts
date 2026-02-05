@@ -23,6 +23,7 @@ export const createNewDocument = async (
         return data
     } catch (error) {
         console.error(error);
+        return error
     }
 };
 
@@ -47,6 +48,7 @@ export const editExisitingDocument = async (
         return data
     } catch (error) {
         console.error(error);
+         return error
     }
 };
 
@@ -69,6 +71,7 @@ export const deleteExisitingDocument = async (
         return data
     } catch (error) {
         console.error(error);
+         return error
     }
 };
 
