@@ -1,22 +1,60 @@
-#landing-split-container{
+#landing-split-container {
+    width: 100%;
     padding: 2rem 8rem;
 }
-#welcome-message{
+
+#welcome-message {
     font-size: 50px;
     color: white;
     font-weight: bold;
 }
-#website-description{
+
+#website-description {
     font-size: 24px;
     color: white;
     font-weight: bold;
 }
-#charawik-mascot{
+
+#charawik-mascot {
     height: 40rem;
 }
-#credits{
+
+#credits {
     padding: 0 5rem;
 }
-#credits p{
+
+#credits p {
     color: rgb(35, 35, 35);
+}
+
+/*Mobile sizing adjustments*/
+
+@media(max-width: 660px) {
+    #landing-split-container {
+        padding: 2rem 0.5rem;
+    }
+
+    #website-description {
+        font-size: 1rem;
+
+    }
+
+    #landing-left,
+    #landing-right {
+        width: 100%;
+    }
+
+    #welcome-message {
+        font-size: 2rem;
+    }
+
+    #charawik-mascot {
+        height: 20rem;
+    }
+
+    #credits {
+        font-size: 1rem;
+        padding: 0 0.5rem;
+    }
+
 }

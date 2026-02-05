@@ -124,7 +124,7 @@ export default function CharacterPage() {
         id={params.characterId ?? ""}
       />
       {
-        <div id="character-page-container" className="row mt-5">
+        <div id="character-page-container" className="d-flex flex-column flex-lg-row mt-lg-5">
           <CharacterNav />
           <main
             id="character-page"

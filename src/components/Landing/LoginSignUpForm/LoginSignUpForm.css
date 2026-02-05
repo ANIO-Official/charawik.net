@@ -1,11 +1,12 @@
-#login-signup-form{
+#login-signup-form {
     filter: drop-shadow(0 13px 4px rgba(0, 0, 0, 0.25));
     height: 45.063rem;
     width: 36.5rem;
     border-radius: 3rem;
     background-color: white;
 }
-#form-toggles{
+
+#form-toggles {
     margin-top: 2rem;
     background-color: #676767;
     border-radius: 3rem 3rem 0 0;
@@ -18,17 +19,17 @@
     font-size: 36px;
 }
 
-#form-submit-button-containiner{
+#form-submit-button-containiner {
     padding: 1rem 2rem;
     padding-left: 5rem;
 }
 
-.error-message{
+.error-message {
     min-height: fit-content;
     font-style: italic;
 }
 
-#submit-error{
+#submit-error {
     font-size: 1rem;
     font-weight: bold;
     color: red;
@@ -37,11 +38,39 @@
     padding: 0.5rem;
 }
 
-#submit-message{
+#submit-message {
     font-size: 1rem;
     font-weight: bold;
     color: green;
     background-color: rgba(205, 255, 178, 0.789);
     text-align: center;
     padding: 0.5rem;
+}
+
+/* Mobile resizing adjustments */
+@media(max-width: 660px) {
+    #login-signup-form {
+        max-height: fit-content;
+        height: 30rem;
+        width: 20rem;
+    }
+    
+    #form-toggles {
+        height: 4rem;
+        width: 20rem;
+        padding: 0 3rem;
+    }
+
+    .toggler {
+        font-size: 1.25rem;
+    }
+
+    #form-inputs{
+        padding: 0 0.5rem;
+    }
+    .error-message {
+        font-size: 0.6rem;
+        width: 70%;
+    }
+
 }

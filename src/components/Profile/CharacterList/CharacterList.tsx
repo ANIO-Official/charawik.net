@@ -17,7 +17,7 @@ export default function CharacterList() {
 
     return (
         <div id="character-list-container" className="d-flex flex-column align-items-center justify-content-between">
-            <h2>Characters</h2>
+            <h2 className="pb-3 pb-lg-5">Characters</h2>
             {
                 loading ? <p>Loading Characters...</p> : //Loading Data
                     error ? <p>Error Loading Characters!</p> : //Error Obtaining Data

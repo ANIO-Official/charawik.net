@@ -1,36 +1,68 @@
-#main-nav{
+#main-nav {
     width: 70%;
-    height: 90vh;
+    height: 50rem;
     border-radius: 0 5rem 5rem 0;
 }
+
 /*Profile Image Styling*/
-#profile-image-upload{ 
+#profile-image-upload {
     width: 20rem;
     height: 20rem;
     border-radius: 100%;
     background-color: #8FC9E9;
     object-position: center;
-    object-fit:cover;
+    object-fit: cover;
 }
-#profile-image-upload:hover{
+
+#profile-image-upload:hover {
     cursor: pointer;
     opacity: 80%;
 }
+
 /*Character Stats Styling*/
-#stats{
+#stats {
     color: #737373;
 }
-#stats-loading, #stats-error{
+
+#stats-loading,
+#stats-error {
     font-size: 1rem;
     font-weight: bold;
     text-align: center;
     padding: 0.5rem;
 }
-#stats-loading{
+
+#stats-loading {
     color: rgb(8, 29, 51);
     background-color: rgba(136, 247, 255, 0.789);
 }
-#stats-error{
+
+#stats-error {
     color: red;
     background-color: rgba(255, 220, 24, 0.789);
+}
+
+
+/* Mobile resizing adjustments */
+@media(max-width: 660px) {
+    header{
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+    #main-nav {
+        width: 100%;
+        height: fit-content;
+        border-radius: 0;
+        filter: drop-shadow(0 8px 6px rgba(0, 0, 0, 0.25));
+    }
+
+    #profile-image-upload {
+        width: 3rem;
+        height: 3rem;
+    }
+
+    button{
+        margin: 0.5rem;
+    }
 }

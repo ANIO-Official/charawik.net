@@ -56,14 +56,14 @@ export default function CharacterNav() {
         <header className="d-flex flex-row justify-content-start col-md">
             <nav
                 id="main-nav"
-                className="bg-white d-flex flex-column align-items-center justify-content-between p-5"
+                className="bg-white d-flex flex-column align-items-center justify-content-between p-lg-5"
             >
                 <form
                     className="d-flex flex-column justify-content-center"
                     onSubmit={handleSubmit}
                 >
                     <label htmlFor="profile-image-input" className="text-center">
-                        <h2 id="username" className="pt-4 pb-5">@{username}</h2>
+                        <h2 id="username" className="py-1 pt-lg-4 pb-lg-5">@{username}</h2>
                         <img
                             onClick={() => setUploading(true)}
                             id="profile-image-upload"

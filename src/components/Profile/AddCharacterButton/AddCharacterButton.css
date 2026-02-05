@@ -8,3 +8,14 @@
     width:150px;
     margin-bottom: 1rem;
 }
+
+
+/* Mobile resizing adjustments */
+@media(max-width: 660px) {
+    .add-character-button{
+    font-size: 1.5rem;
+    height:  5rem;
+    width: 5rem;
+    margin-bottom: 1rem;
+    }
+}

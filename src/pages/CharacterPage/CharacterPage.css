@@ -1,48 +1,79 @@
-#character-details-container{
+#character-details-container {
     background-color: rgba(60, 82, 139, 0.22);
     width: 70%;
     min-height: 90vh;
     border-radius: 3rem;
     padding: 3rem;
 }
-.button-container{
+
+.button-container {
     width: 100%;
 }
-#character-details{
+
+#character-details {
     width: 100%;
 }
-.character-details-title{
+
+.character-details-title {
     color: #1E1E1E;
     margin: 0.5rem 0;
 }
-#character-details p{
+
+#character-details p {
     color: #000000;
     font-size: 1.25rem;
 }
-#character-subname{
+
+#character-subname {
     color: rgba(30, 30, 30, 0.32);
     font-style: italic;
 }
-#create-activity-button{
+
+#create-activity-button {
     background: none;
     color: #1E1E1E;
     font-size: 1.5rem;
     filter: none;
 }
-#create-activity-button:hover{
+
+#create-activity-button:hover {
     color: #003eba;
 }
+
 .edit-button {
     font-size: 1.25rem;
     background: transparent;
     width: fit-content;
     height: fit-content;
-    padding:  0 1rem;
+    padding: 0 1rem;
 }
 
-.edit-character-input{
+.edit-character-input {
     height: max-content;
     width: 100%;
     text-align: start;
     text-overflow: ellipsis;
+}
+
+
+/*Mobile sizing adjustments*/
+
+@media(max-width: 660px) {
+    #character-details-container {
+        width: 90%;
+        min-height: 90vh;
+        padding: 1rem;
+        margin-top: 1rem;
+        border-radius: 1rem;
+    }
+
+    #character-details p, #create-activity-button {
+        font-size: 0.9rem;
+    }
+
+    .edit-button {
+        font-size: 0.9rem;
+        padding: 0 0.5rem;
+    }
+
 }

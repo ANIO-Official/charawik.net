@@ -1,8 +1,9 @@
-html{
+html {
     overflow-x: hidden;
 }
+
 /* Font */
-html body{
+html body {
     background-color: #8FC9E9;
     font-family: "Inter";
 }
@@ -16,32 +17,37 @@ h2 {
     font-size: 32px;
     color: white;
 }
-#username,#stat #character-name{
- color: #575757;
+
+#username,
+#stat #character-name {
+    color: #575757;
 }
 
-label{
+label {
     font-size: 32px;
     color: #575757;
     font-weight: 500;
     margin-bottom: 0.25rem;
 }
 
-h3, p{
+h3,
+p {
     font-size: 24px;
     color: #575757;
 }
 
-.active{
+.active {
     color: #FFDE70;
 }
-.inactive, .empty{
+
+.inactive,
+.empty {
     color: #C8C8C8;
 }
 
 /* Buttons */
 
-button{
+button {
     width: 160px;
     height: 55px;
     border-radius: 80px;
@@ -52,23 +58,27 @@ button{
     font-size: 1.3rem;
 }
 
-.basic{
+.basic {
     background: linear-gradient(#8FC9E9, #5D80D8);
 }
-.warning{
-    background: linear-gradient(#FD8D8D,#D63B3B);
+
+.warning {
+    background: linear-gradient(#FD8D8D, #D63B3B);
 }
-.confirm{
-    background: linear-gradient(#7CFD87,#22662A);
+
+.confirm {
+    background: linear-gradient(#7CFD87, #22662A);
 }
-.toggler{
+
+.toggler {
     background-color: transparent;
     filter: none;
 }
 
 /* Input Fields */
 
-input, input:active{
+input,
+input:active {
     border-radius: 30px;
     border: none;
     background-color: #c2e6fa;
@@ -77,11 +87,42 @@ input, input:active{
     margin-bottom: 1rem;
     padding: 1rem;
 }
-input:user-invalid{
+
+input:user-invalid {
     background-color: #e9a78f;
     outline: 2px solid #D63B3B;
 }
-input:user-valid{
+
+input:user-valid {
     background-color: #8fe9be;
     outline: 2px solid #43b933;
+}
+
+
+/*Mobile sizing adjustments*/
+
+@media(max-width: 660px) {
+    button {
+        width: 90px;
+        height: 40px;
+        font-size: 1rem;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    h2,
+    label,
+    h3,
+    p {
+        font-size: 1rem;
+    }
+
+    input,
+    input:active {
+        width: 15rem;
+        height: 2rem;
+        margin: 0.15rem 0;
+    }
 }
