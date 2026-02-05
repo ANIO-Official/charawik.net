@@ -6,12 +6,16 @@ import { useAuthContext } from "../../context/AuthContext/AuthContext";
 import DeletionModal from "../../components/Character/DeletionModal/DeletionModal";
 import { useEffect, useState } from "react";
 import { editExisitingDocument } from "../../utilities/requestHandlers";
+import ActivityModal from "../../components/Character/ActivityModal/ActivityModal";
+import ActivityPreview from "../../components/Activities/ActivityPreview";
+import type { Activity } from "../../types";
 
 export default function CharacterPage() {
   const params = useParams();
   const { token } = useAuthContext();
   const navigate = useNavigate();
-  const [hidden, setIsHidden] = useState(true);
+  const [deletModalHidden, setDeleteModalHidden] = useState(true);
+  const [activityModalHidden, setActivityModalHidden] = useState(true);
   const [editing, setEditing] = useState({
     editname: false,
     editage: false,
@@ -27,12 +31,15 @@ export default function CharacterPage() {
     dislikes: [],
   });
 
+  //Fetch Data=================
   const characterFetch = useFetch(
     `${import.meta.env.VITE_API_URL}/api/characters/${params.characterId}?token=${token}`,
   );
-
+  const activitiesFetch = useFetch(
+    `${import.meta.env.VITE_API_URL}/api/characters/${params.characterId}/activities?token=${token}`,
+  );
+  //Store Data===================
   const [formData, setFormData] = useState<Object>({}); //Nothing in the data by default
-
   //Change to EditMode
   const handleClick = async (event: React.MouseEvent<HTMLButtonElement>) => {
     const id = event.currentTarget.id;
@@ -118,13 +125,21 @@ export default function CharacterPage() {
   return (
     <>
       <DeletionModal
-        hidden={hidden}
-        setHidden={setIsHidden}
+        hidden={deletModalHidden}
+        setHidden={setDeleteModalHidden}
         documentType="character"
         id={params.characterId ?? ""}
       />
+      <ActivityModal
+        hidden={activityModalHidden}
+        setHidden={setActivityModalHidden}
+        id={params.characterId ?? ""}
+      />
       {
-        <div id="character-page-container" className="d-flex flex-column flex-lg-row mt-lg-5">
+        <div
+          id="character-page-container"
+          className="d-flex flex-column flex-lg-row mt-lg-5"
+        >
           <CharacterNav />
           <main
             id="character-page"
@@ -138,7 +153,7 @@ export default function CharacterPage() {
                 <div style={{ maxHeight: "fit-content" }}>
                   <button
                     className="warning"
-                    onClick={() => setIsHidden(false)}
+                    onClick={() => setDeleteModalHidden(false)}
                   >
                     Delete
                   </button>
@@ -183,7 +198,10 @@ export default function CharacterPage() {
                         <p>{values.biography}</p>
                       ) /*Biography */
                     }
-                    <div id="like-dislikes-container" className="row row-cols-lg-2">
+                    <div
+                      id="like-dislikes-container"
+                      className="row row-cols-lg-2"
+                    >
                       <div id="likes-container">
                         <h2 className="character-details-title">
                           Likes
@@ -267,20 +285,28 @@ export default function CharacterPage() {
                             )}
                           </ul>
                         )}
-                        
                       </div>
                     </div>
                     <div className="button-container d-flex flex-row justify-content-between">
                       <h2 className="character-details-title">Activity</h2>
                       <button
-                        disabled={!hidden}
-                        onClick={() => navigate("/characters/create")}
+                        disabled={!deletModalHidden}
+                        onClick={() => setActivityModalHidden(false)}
                         id="create-activity-button"
                       >
                         New Post +
                       </button>
                     </div>
-                    <div>Activity previews go here</div>
+                    <ul>
+                      {Object.keys(activitiesFetch.data[0]).length > 0 &&
+                        activitiesFetch.data[0].activities.length > 0 &&
+                        activitiesFetch.data[0].activities.map((activity: Activity) => (
+                          <ActivityPreview
+                            key={activity._id}
+                            activity={activity}
+                          />
+                        ))}
+                    </ul>
                   </div>
                 )
               )}

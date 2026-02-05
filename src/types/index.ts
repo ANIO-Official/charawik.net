@@ -1,7 +1,7 @@
 import type { ReactNode } from "react"
 
 //====Fetch Data Types
-export interface userData {
+export interface userData {//Register/Login Response
   token: string,
   user: {
     _id: string,
@@ -11,13 +11,17 @@ export interface userData {
     __v: Number
   }
 }
+export interface CharacterData {//Get Response (All)
+  characters: Character[],
+  count: Number
+}
 
-export interface characterResData{
+export interface characterResData{//Put/Post Response (One)
   message: string
   characters: Character 
 }
 
-export interface Character {
+export interface Character { //Get Response (One)
   _id: string,
   profileImage: string,
   name: string,
@@ -30,13 +34,12 @@ export interface Character {
 
 }
 
-export interface CharacterData {
-  characters: Character[],
-  count: Number
-}
-
-export interface ActivityData {
-
+export interface Activity {//Get Response (One)
+  _id: string,
+  title: string,
+  content: string,
+  character: string,
+  __v: Number
 }
 
 //======== Context Types
@@ -59,11 +62,20 @@ export interface CharacterPreviewProps {
   characterPicture: string,
   characterID: string
 }
+export interface ActivityPreviewProps{
+  activity: Activity
+}
 
 export interface DeletionModalProps {
   hidden: boolean,
   setHidden: (newBool: boolean) => void,
   documentType: string,
+  id: string
+}
+
+export interface ActivityModalProps{
+  hidden: boolean,
+  setHidden: (newBool: boolean) => void,
   id: string
 }
 
