@@ -2,10 +2,9 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../../context/AuthContext/AuthContext";
 import useFetch from "../../../custom-hooks/useFetch";
-import type { ProfileImage } from "../../../types";
-import { submitProfilePicture } from "../../../utilities/userRequests";
 import Mascot from "../../../assets/charawik-mascot-anio.png";
 import "../../MainNav.css"
+import { editExisitingDocument } from "../../../utilities/requestHandlers";
 
 export default function CharacterNav() {
     const params = useParams();
@@ -16,7 +15,7 @@ export default function CharacterNav() {
         `${import.meta.env.VITE_API_URL}/api/characters/${params.characterId}?token=${token}`,
     );
     const [uploading, setUploading] = useState<Boolean>(false);
-    const [profileImage, setProfileImage] = useState<ProfileImage>({ profilePicture: "" });
+    const [profileImage, setProfileImage] = useState({ profileImage: "" });
     useEffect(() => {
         if (
             Object.keys(characterFetch.data[0]).length > 0 && //data returns
@@ -25,14 +24,19 @@ export default function CharacterNav() {
         ) {
             const imageURL: string = characterFetch.data[0].characters.profileImage
             // no error occured
-            setProfileImage({ profilePicture: imageURL }); //set the data to the profile picture state variable.
+            setProfileImage({ profileImage: imageURL }); //set the data to the profile picture state variable.
         }
     }, [characterFetch.data]);
 
     //PUT Request for Any changes submitted
     const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>) => {
         event.preventDefault();
-        await submitProfilePicture(profileImage, token);
+        await editExisitingDocument(
+            "characters",
+            params.characterId ?? "",
+            profileImage,
+            token
+        );
         setUploading(false);
     };
 
@@ -40,7 +44,7 @@ export default function CharacterNav() {
         event: React.ChangeEvent<HTMLInputElement>,
     ) => {
         event.preventDefault();
-        setProfileImage({ ...profileImage, profilePicture: event.target.value });
+        setProfileImage({ ...profileImage, profileImage: event.target.value });
     };
 
     const handleCancelUpload = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -63,7 +67,7 @@ export default function CharacterNav() {
                         <img
                             onClick={() => setUploading(true)}
                             id="profile-image-upload"
-                            src={profileImage.profilePicture || Mascot}
+                            src={profileImage.profileImage || Mascot}
                             alt="Character profile picture."
                         />
                     </label>
