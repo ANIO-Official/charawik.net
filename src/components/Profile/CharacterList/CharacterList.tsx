@@ -38,7 +38,7 @@ export default function CharacterList() {
                                 }
                                 {
                                     data[0].count < 12 && blanks.map((blank, index) => (
-                                        <AddCharacterButton key={`blank${index}`} />
+                                        <AddCharacterButton key={`blank${index}${blank}`} />
                                     ))
                                 }
                             </ul>
@@ -50,7 +50,7 @@ export default function CharacterList() {
                             >
                                 {
                                     blanks.map((blank, index) => (
-                                        <AddCharacterButton key={`blank${index}`} />
+                                        <AddCharacterButton key={`blank${index}${blank}`} />
                                     ))
                                 }
                             </ul>

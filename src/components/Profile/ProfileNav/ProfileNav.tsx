@@ -54,6 +54,7 @@ export default function ProfileNav() {
     };
 
     const handleLogout = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault()
         setToken("");
         navigate("/");
         console.log("logged out.");

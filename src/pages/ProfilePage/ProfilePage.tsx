@@ -1,11 +1,10 @@
-import { useNavigate, useParams } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import "./ProfilePage.css"
 import ProfileNav from "../../components/Profile/ProfileNav/ProfileNav"
 import { useEffect } from "react"
 import CharacterList from "../../components/Profile/CharacterList/CharacterList"
 
 export default function ProfilePage() {
-    const params = useParams()
     const token = localStorage.getItem("token")
     const navigate = useNavigate()
 
