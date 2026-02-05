@@ -98,9 +98,9 @@ export default function ActivityPage() {
             ) : (
               <div id="activity">
                 <h1 className="pb-3 pb-lg-5">
-                  {activityFetch.data[0].activity.title}
+                  {formData.title}
                 </h1>
-                <p>{activityFetch.data[0].activity.content}</p>
+                <p>{formData.content}</p>
               </div>
             )}
             <div id="activity-option-container">
