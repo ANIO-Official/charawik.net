@@ -4,7 +4,7 @@ import { deleteExisitingDocument } from "../../../utilities/requestHandlers"
 import "./Deletion Modal.css"
 import { useAuthContext } from "../../../context/AuthContext/AuthContext"
 export default function DeletionModal({ hidden, setHidden, documentType, id }: DeletionModalProps) {
-    const { token } = useAuthContext()
+    const { token, username } = useAuthContext()
     const navigate = useNavigate()
 
     const handleDeletion = () => {
@@ -13,7 +13,7 @@ export default function DeletionModal({ hidden, setHidden, documentType, id }: D
             id,
             token
         )
-        navigate(-1)
+        navigate(`/${username}`)
     }
 
     return (
