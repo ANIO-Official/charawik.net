@@ -15,7 +15,7 @@ CharaWik.net is a personal blog style wikipedia page for artists to keep track o
 
 ### GitHub Link
 
-https://github.com/ANIO-Official/react-where-in-the-world 
+https://github.com/ANIO-Official/charawik.net
 
 ### Features
 
@@ -24,10 +24,8 @@ https://github.com/ANIO-Official/react-where-in-the-world
 - Character Inventory: Create, Read, Update, and Delete Characters
 - Character Activity Feed: Create, Read, Update, and Delete Activities to describe events in your character's life.
 
-<!-- ### View Live Website
-
-
-### Previews -->
+### View Live Website
+https://charawik-net.onrender.com
 
 
 ### Built with
