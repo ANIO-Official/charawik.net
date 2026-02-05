@@ -77,6 +77,7 @@ export interface ActivityModalProps{
   hidden: boolean,
   setHidden: (newBool: boolean) => void,
   id: string
+  setActivities: Function
 }
 
 //======== Other Types

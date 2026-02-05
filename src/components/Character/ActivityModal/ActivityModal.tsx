@@ -8,6 +8,7 @@ export default function ActivityModal({
   hidden,
   setHidden,
   id,
+  setActivities
 }: ActivityModalProps) {
   const { token } = useAuthContext();
   const [values, setValues] = useState<Object>({});
@@ -24,9 +25,10 @@ export default function ActivityModal({
   };
 
   //Create new Activity via Post Request
-  const handlePost = (event: React.SubmitEvent<HTMLFormElement>) => {
+  const handlePost = async (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault()
-    createNewDocument("activities", id, values, token);
+    await createNewDocument("activities", id, values, token);
+    setActivities((prevData : Object[])=> [...prevData, values])
     setHidden(true)
   };
 

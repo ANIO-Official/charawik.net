@@ -5,7 +5,7 @@ import "./ActivityPreview.css"
 export default function ActivityPreview({ activity }: ActivityPreviewProps) {
     const navigate = useNavigate()
     return (
-      <button 
+      <button key={activity._id}
       onClick={()=>navigate(`/characters/${activity.character}/activities/${activity._id}`)}
       className="activity-preview">
         {activity.title}

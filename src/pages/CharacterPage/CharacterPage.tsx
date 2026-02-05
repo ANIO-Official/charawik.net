@@ -29,6 +29,8 @@ export default function CharacterPage() {
     likes: [],
     dislikes: [],
   });
+  const [activities, setActivities] = useState<Activity[]>([])
+
 
   //Fetch Data=================
   const characterFetch = useFetch(
@@ -101,7 +103,7 @@ export default function CharacterPage() {
     }
   };
 
-  useEffect(() => {
+  useEffect(() => {  // Character Fetch Request
     //When all data has returned from the fetch, set it as the new default values.
     if (
       !characterFetch.loading &&
@@ -119,7 +121,20 @@ export default function CharacterPage() {
         dislikes: dislikes,
       }));
     }
+    
   }, [characterFetch.data]);
+
+  useEffect(() => { // Activities Fetch Request
+    //When all data has returned from the fetch, set it as the new default values.
+    if (
+      !activitiesFetch.loading &&
+      !activitiesFetch.error &&
+      Object.keys(activitiesFetch.data[0]).length > 0
+    ) {
+      setActivities(activitiesFetch.data[0].activities)
+    }
+    
+  }, [activitiesFetch.data]);
 
   return (
     <>
@@ -133,6 +148,7 @@ export default function CharacterPage() {
         hidden={activityModalHidden}
         setHidden={setActivityModalHidden}
         id={params.characterId ?? ""}
+        setActivities={setActivities}
       />
       {
         <div
@@ -298,13 +314,15 @@ export default function CharacterPage() {
                     </div>
                     <ul>
                       {Object.keys(activitiesFetch.data[0]).length > 0 &&
-                        activitiesFetch.data[0].activities.length > 0 &&
-                        activitiesFetch.data[0].activities.map((activity: Activity) => (
+                        activitiesFetch.data[0].activities.length > 0 ?
+                          activities.map((activity: Activity) => (
                           <ActivityPreview
                             key={activity._id}
                             activity={activity}
                           />
-                        ))}
+                        )) :
+                        <p><i>No Activities Yet</i></p>
+                      }
                     </ul>
                   </div>
                 )

@@ -15,8 +15,7 @@ export default function DeletionModal({
   const handleDeletion = () => {
     documentType === "character" && deleteExisitingDocument("characters", id, token);
     documentType === "activity" && deleteExisitingDocument("activities", id, token)
-    documentType === "character" && navigate(`/${username}`);
-    documentType === "activity" && navigate(-1);
+    navigate(`/${username}`);
   };
 
   return (
