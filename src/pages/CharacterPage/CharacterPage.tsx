@@ -183,7 +183,7 @@ export default function CharacterPage() {
                         <p>{values.biography}</p>
                       ) /*Biography */
                     }
-                    <div id="like-dislikes-container">
+                    <div id="like-dislikes-container" className="row row-cols-lg-2">
                       <div id="likes-container">
                         <h2 className="character-details-title">
                           Likes
