@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import "./CharacterPage.css";
 import CharacterNav from "../../components/Character/CharacterNav/CharacterNav";
 import useFetch from "../../custom-hooks/useFetch";
@@ -13,7 +13,6 @@ import type { Activity } from "../../types";
 export default function CharacterPage() {
   const params = useParams();
   const { token } = useAuthContext();
-  const navigate = useNavigate();
   const [deletModalHidden, setDeleteModalHidden] = useState(true);
   const [activityModalHidden, setActivityModalHidden] = useState(true);
   const [editing, setEditing] = useState({
@@ -41,7 +40,7 @@ export default function CharacterPage() {
   //Store Data===================
   const [formData, setFormData] = useState<Object>({}); //Nothing in the data by default
   //Change to EditMode
-  const handleClick = async (event: React.MouseEvent<HTMLButtonElement>) => {
+  const toggleEditing = async (event: React.MouseEvent<HTMLButtonElement>) => {
     const id = event.currentTarget.id;
     setEditing((prevData) => ({ ...prevData, [id]: true })); //Turn on editing
   };
@@ -174,7 +173,7 @@ export default function CharacterPage() {
                     <h2 className="character-details-title">
                       Bio
                       <button
-                        onClick={handleClick}
+                        onClick={toggleEditing}
                         id="editbio"
                         className="edit-button"
                       >
@@ -206,7 +205,7 @@ export default function CharacterPage() {
                         <h2 className="character-details-title">
                           Likes
                           <button
-                            onClick={handleClick}
+                            onClick={toggleEditing}
                             id="editlikes"
                             className="edit-button"
                           >
@@ -248,7 +247,7 @@ export default function CharacterPage() {
                         <h2 className="character-details-title">
                           Dislikes
                           <button
-                            onClick={handleClick}
+                            onClick={toggleEditing}
                             id="editdislikes"
                             className="edit-button"
                           >

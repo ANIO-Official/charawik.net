@@ -1,0 +1,8 @@
+#activity-container{
+    background-color: #FFF4CF;
+    color: black;
+    width: 70%;
+    min-height: 90vh;
+    border-radius: 3rem;
+    padding: 3rem;
+}

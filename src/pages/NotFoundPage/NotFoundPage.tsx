@@ -1,8 +1,15 @@
 import { useNavigate } from "react-router-dom"
 import './NotFoundPage.css'
+import { useAuthContext } from "../../context/AuthContext/AuthContext"
 
 export default function NotFoundPage(){
     const navigate = useNavigate()
+    const { token, username } = useAuthContext()
+
+    const handleRedirect = (event: React.MouseEvent<HTMLButtonElement>)=>{
+       (!token || !token && username) && navigate('/') //No token, go to landing
+       token && username && navigate(`/${username}`) // Token and username, go to user Profile
+    }
 
     return(
         <main id="notfound-error-page" className="d-flex flex-column align-items-center">
@@ -15,7 +22,7 @@ export default function NotFoundPage(){
                 <br/>
                 <b>Here's a way back home. o(*￣▽￣*)ブ See ya, cowboy!</b>
             </p>
-            <button id="notfound-error-button" onClick={() => navigate('/')}>Return to Landing Page</button>
+            <button id="notfound-error-button" onClick={handleRedirect}>Return to Landing Page</button>
         </main>
     )
 }
