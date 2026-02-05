@@ -6,7 +6,7 @@ export default function NotFoundPage(){
     const navigate = useNavigate()
     const { token, username } = useAuthContext()
 
-    const handleRedirect = (event: React.MouseEvent<HTMLButtonElement>)=>{
+    const handleRedirect = ()=>{
        (!token || !token && username) && navigate('/') //No token, go to landing
        token && username && navigate(`/${username}`) // Token and username, go to user Profile
     }

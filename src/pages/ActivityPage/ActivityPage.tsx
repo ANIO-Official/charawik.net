@@ -45,6 +45,13 @@ export default function ActivityPage() {
     setEditing(false) //set editing to false
   }
 
+   useEffect(() => {
+    //no token? No access. 404 Page Redirect
+    if (!token || token === "") {
+      navigate("*");
+    }
+  }, [token]);
+
   //set fetched data as default form data
   useEffect(()=>{
     if(!activityFetch.loading &&
@@ -56,11 +63,7 @@ export default function ActivityPage() {
 
   }, [activityFetch.data])
 
-  return activityFetch.loading ? (
-    <p>Loading Activity</p>
-  ) : activityFetch.error ? (
-    navigate("*") //Send ot 404 page when error
-  ) : (
+  return ( 
     Object.keys(activityFetch.data[0]).length > 0 && (
       <div
         id="activity-page-container"
